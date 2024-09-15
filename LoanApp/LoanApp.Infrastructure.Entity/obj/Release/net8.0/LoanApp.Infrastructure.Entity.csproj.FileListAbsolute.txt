@@ -1,0 +1,17 @@
+C:\Users\Dell\source\repos\LoanApp\LoanApp.Infrastructure.Entity\bin\Release\net8.0\LoanApp.Infrastructure.Entity.deps.json
+C:\Users\Dell\source\repos\LoanApp\LoanApp.Infrastructure.Entity\bin\Release\net8.0\LoanApp.Infrastructure.Entity.runtimeconfig.json
+C:\Users\Dell\source\repos\LoanApp\LoanApp.Infrastructure.Entity\bin\Release\net8.0\LoanApp.Infrastructure.Entity.dll
+C:\Users\Dell\source\repos\LoanApp\LoanApp.Infrastructure.Entity\bin\Release\net8.0\LoanApp.Infrastructure.Entity.pdb
+C:\Users\Dell\source\repos\LoanApp\LoanApp.Infrastructure.Entity\bin\Release\net8.0\LoanApp.Domain.dll
+C:\Users\Dell\source\repos\LoanApp\LoanApp.Infrastructure.Entity\bin\Release\net8.0\LoanApp.Domain.pdb
+C:\Users\Dell\source\repos\LoanApp\LoanApp.Infrastructure.Entity\obj\Release\net8.0\LoanApp.Infrastructure.Entity.csproj.AssemblyReference.cache
+C:\Users\Dell\source\repos\LoanApp\LoanApp.Infrastructure.Entity\obj\Release\net8.0\LoanApp.Infrastructure.Entity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Dell\source\repos\LoanApp\LoanApp.Infrastructure.Entity\obj\Release\net8.0\LoanApp.Infrastructure.Entity.AssemblyInfoInputs.cache
+C:\Users\Dell\source\repos\LoanApp\LoanApp.Infrastructure.Entity\obj\Release\net8.0\LoanApp.Infrastructure.Entity.AssemblyInfo.cs
+C:\Users\Dell\source\repos\LoanApp\LoanApp.Infrastructure.Entity\obj\Release\net8.0\LoanApp.Infrastructure.Entity.csproj.CoreCompileInputs.cache
+C:\Users\Dell\source\repos\LoanApp\LoanApp.Infrastructure.Entity\obj\Release\net8.0\LoanApp..D499AC0C.Up2Date
+C:\Users\Dell\source\repos\LoanApp\LoanApp.Infrastructure.Entity\obj\Release\net8.0\LoanApp.Infrastructure.Entity.dll
+C:\Users\Dell\source\repos\LoanApp\LoanApp.Infrastructure.Entity\obj\Release\net8.0\refint\LoanApp.Infrastructure.Entity.dll
+C:\Users\Dell\source\repos\LoanApp\LoanApp.Infrastructure.Entity\obj\Release\net8.0\LoanApp.Infrastructure.Entity.pdb
+C:\Users\Dell\source\repos\LoanApp\LoanApp.Infrastructure.Entity\obj\Release\net8.0\LoanApp.Infrastructure.Entity.genruntimeconfig.cache
+C:\Users\Dell\source\repos\LoanApp\LoanApp.Infrastructure.Entity\obj\Release\net8.0\ref\LoanApp.Infrastructure.Entity.dll

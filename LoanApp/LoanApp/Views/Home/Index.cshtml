@@ -1,0 +1,142 @@
+﻿@{
+    ViewData["Title"] = "Solicitud de Préstamo";
+
+    List<SelectListItem> lstSelectDoctorType = (List<SelectListItem>)ViewBag.selectListDoctorType;
+    List<SelectListItem> lstSelectProvince = (List<SelectListItem>)ViewBag.selectListProvince;
+    List<SelectListItem> lstSelectIdentificationType = (List<SelectListItem>)ViewBag.selectListIdentificationType;
+    List<SelectListItem> lstSelectTypeFamilyRelationShip = (List<SelectListItem>)ViewBag.selectListTypeFamilyRelationShip;
+    List<SelectListItem> lstSelectSex = (List<SelectListItem>)ViewBag.selectListSex;
+    List<SelectListItem> lstSelectProvinceGeneral = (List<SelectListItem>)ViewBag.selectListProvinceGeneral;
+    List<SelectListItem> lstSelectLoanAmount = (List<SelectListItem>)ViewBag.selectListLoanAmount; //selectListLoanAmount
+    List<SelectListItem> lstSelectYearOfResidence = (List<SelectListItem>)ViewBag.selectListYearOfResidence; //selectListLoanAmount
+}
+
+<br />
+<br />
+<div class="card">
+    <div class="card-header">
+        <h3><center><b>Solicitud de Préstamos</b></center></h3>
+    </div>
+    <div class="card-body">
+
+        <form class="needs-validation" name="FomrRequest" method="post" asp-controller="Home" asp-action="SendApplication">
+            <b><label for="lblPasanteResidente" class="form-label">Pasante o Residente : </label></b>
+            @Html.DropDownList("lstDcotorType", lstSelectDoctorType, "Seleccione..", new { @class = "form-control .form-select-lg example" })
+
+            <div class="mb-3">
+                <b><label for="lblHospital" class="form-label">Hospital / CPN</label></b>
+                <input type="txt" class="form-control" id="txtHospital" name="Hospital" aria-describedby="emailHelp" required>
+            </div>
+
+            <b><label for="lblProvince" class="form-label">Provincia</label></b>
+            @Html.DropDownList("lstProvince", lstSelectProvince, "Seleccione..", new { @class = "form-control .form-select-lg example" })
+
+            <div class="mb-3">
+                <b><label for="lbltextPassingTime" class="form-label">Que tiempo tiene como pasante ?</label></b>
+                <input type="txt" class="form-control" id="textPassingTime" name="PassingTime" aria-describedby="emailHelp" required>
+            </div>
+
+            <div class="mb-3">
+                <b><label for="lblEspecialidad" class="form-label">Especialidad</label></b>
+                <input type="txt" class="form-control" id="textSpeciality" name="Speciality" aria-describedby="emailHelp" required>
+            </div>
+
+            <div class="mb-3">
+                <b><label for="lblYearOfResidence" class="form-label">Año de residencia</label></b>
+                @*   <input type="txt" class="form-control" id="textYearOfResidence" aria-describedby="emailHelp" required> *@
+                @Html.DropDownList("lstYearOfResidence", lstSelectYearOfResidence, "Seleccione..", new { @class = "form-control .form-select-lg example" })
+            </div>
+
+            <div class="accordion" id="accordionExample">
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            <b>Datos Generales</b>
+                        </button>
+                    </h2>
+
+                    <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+
+                            <div class="mb-3">
+                                <b><label for="txtName" class="form-label">Nombre</label></b>
+                                <input type="text" class="form-control" id="txtName" name="Name" required>
+                            </div>
+                            <div class="mb-3">
+                                <b><label for="txtLastName" class="form-label">Apellidos</label></b>
+                                <input type="text" class="form-control" id="txtLastName" name="LastName" required>
+                            </div>
+                            <div class="mb-3">
+                                <b><label for="txtNacionalIdentification" class="form-label">Cedula</label></b>
+                                <input type="text" class="form-control" id="txtNacionalIdentification" name="NacionalIdentification" required>
+                            </div>
+                            <b><label for="lblSexo" class="form-label">Sexo</label></b>
+                            @Html.DropDownList("lstSex", lstSelectSex, "Seleccione..", new { @class = "form-control .form-select-lg example" })
+
+                            <div class="mb-3">
+                                <b><label for="lblAddress" class="form-label">Direccion Domicilio</label></b>
+                                <input type="text" class="form-control" id="txtAddress" name="Address" required>
+                            </div>
+
+                            <b><label for="lblProvinceLive" class="form-label">Provincia</label></b>
+                            @Html.DropDownList("lstSelectProvinceGeneral", lstSelectProvinceGeneral, "Seleccione..", new { @class = "form-control .form-select-lg example" })
+
+                            <div class="mb-3">
+                                <b><label for="lblCelular" class="form-label">Celular (WhatSaap)</label></b>
+                                <input type="text" class="form-control" id="txtCelPhone" name="CelPhone" required>
+                            </div>
+
+                            <br />
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="accordion" id="accordionExample2">
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <b>Datos del Familiar</b>
+                            </button>
+                        </h2>
+
+                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample2">
+                            <div class="accordion-body">
+
+                                <div class="mb-3">
+                                    <b><label for="recipient-name" class="col-form-label">Telefono de un familiar directo</label></b>
+                                    <input type="text" class="form-control" id="txtFamilyTelephone" name="FamilyTelephone" required>
+                                </div>
+                                <div class="mb-3">
+                                    <b><label for="recipient-name" class="col-form-label">Nombre del familiar</label></b>
+                                    <input type="text" class="form-control" id="txtFamilyName" name="FamilyName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <b><label for="recipient-name" class="col-form-label">Vinculo Familiar</label></b>
+                                    @Html.DropDownList("lstTypeFamilyRelationShip", lstSelectTypeFamilyRelationShip, "Seleccione..", new { @class = "form-control .form-select-lg example" })
+                                </div>
+
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <br />
+                    <br />
+                    <div class="mb-3">
+                        <b><label for="lblAmount" class="form-label">Monto a Prestar</label></b>
+                        @Html.DropDownList("lstLoanAmount", lstSelectLoanAmount, "Seleccione..", new { @class = "form-control .form-select-lg example" })
+                    </div>
+
+                    <br />
+                    <button type="submit" class="btn btn-primary">Enviar la Solicitud</button>
+
+        </form>
+
+
+    </div>
+</div>

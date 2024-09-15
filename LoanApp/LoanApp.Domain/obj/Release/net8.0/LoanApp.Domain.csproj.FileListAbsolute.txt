@@ -1,0 +1,11 @@
+C:\Users\Dell\source\repos\LoanApp\LoanApp.Domain\bin\Release\net8.0\LoanApp.Domain.deps.json
+C:\Users\Dell\source\repos\LoanApp\LoanApp.Domain\bin\Release\net8.0\LoanApp.Domain.dll
+C:\Users\Dell\source\repos\LoanApp\LoanApp.Domain\bin\Release\net8.0\LoanApp.Domain.pdb
+C:\Users\Dell\source\repos\LoanApp\LoanApp.Domain\obj\Release\net8.0\LoanApp.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Dell\source\repos\LoanApp\LoanApp.Domain\obj\Release\net8.0\LoanApp.Domain.AssemblyInfoInputs.cache
+C:\Users\Dell\source\repos\LoanApp\LoanApp.Domain\obj\Release\net8.0\LoanApp.Domain.AssemblyInfo.cs
+C:\Users\Dell\source\repos\LoanApp\LoanApp.Domain\obj\Release\net8.0\LoanApp.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Dell\source\repos\LoanApp\LoanApp.Domain\obj\Release\net8.0\LoanApp.Domain.dll
+C:\Users\Dell\source\repos\LoanApp\LoanApp.Domain\obj\Release\net8.0\refint\LoanApp.Domain.dll
+C:\Users\Dell\source\repos\LoanApp\LoanApp.Domain\obj\Release\net8.0\LoanApp.Domain.pdb
+C:\Users\Dell\source\repos\LoanApp\LoanApp.Domain\obj\Release\net8.0\ref\LoanApp.Domain.dll

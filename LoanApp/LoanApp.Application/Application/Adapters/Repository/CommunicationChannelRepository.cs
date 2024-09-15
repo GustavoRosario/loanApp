@@ -1,0 +1,34 @@
+﻿using LoanApp.Application.Helpers;
+using LoanApp.Domain.Dto;
+using LoanApp.Domain.Ports.Repository;
+using LoanApp.Infrastructure.Entity.Data;
+
+namespace LoanApp.Application.Application.Adapters.Repository
+{
+    public class CommunicationChannelRepository : ICommunicationChannelRepository
+    {
+        LoanAppDbContext _db;
+        private Context db = new Context();
+        public CommunicationChannelRepository()
+        {
+            _db = db.Get();
+        }
+
+        public async Task<List<CommunicationChannelDto>> GetData(int communicationChannelTypeId)
+        {
+            List<CommunicationChannelDto> lst = null;
+            var lstCommunicationChannel = _db.lo_communication_channel.Where(x => x.communication_channel_type_id == communicationChannelTypeId && x.active == true).ToList();
+
+            lst = lstCommunicationChannel.ConvertAll(x =>
+            {
+                return new CommunicationChannelDto()
+                {
+                    communication_channel_type_id = x.communication_channel_id,
+                    communication_channel_name_value = x.communication_channel_value
+                };
+            });
+
+            return await Task.Run(() => lst);
+        }
+    }
+}
