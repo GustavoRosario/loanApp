@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using LoanApp.Application.Helpers;
 using LoanApp.Application.Dto;
 using LoanApp.Models;
+using System.IO;
 
 namespace LoanApp.Controllers
 {
@@ -22,8 +23,9 @@ namespace LoanApp.Controllers
         private ILoanAmount loanAmount;
         private ICommunicationChannelRepository communicationChannelRepository;
         private IYearOfResidenceRepository yearOfResidenceRepository;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public HomeController(IApplicationRepository _applicationRepository, ICommandCaller commandCaller, IDoctorTypeRepository doctorTypeRepository, IIdentificationTypeRepository identificationTypeRepository, IProvinceRepository provinceRepository, ISexRepository sexRepository, ITypeFamilyRelationShipRepository typeFamilyRelationShipRepository, ILoanAmount loanAmount, ICommunicationChannelRepository communicationChannelRepository, IYearOfResidenceRepository yearOfResidenceRepository)
+        public HomeController(IApplicationRepository _applicationRepository, ICommandCaller commandCaller, IDoctorTypeRepository doctorTypeRepository, IIdentificationTypeRepository identificationTypeRepository, IProvinceRepository provinceRepository, ISexRepository sexRepository, ITypeFamilyRelationShipRepository typeFamilyRelationShipRepository, ILoanAmount loanAmount, ICommunicationChannelRepository communicationChannelRepository, IYearOfResidenceRepository yearOfResidenceRepository, IWebHostEnvironment enviroment)
         {
             this._applicationRepository = _applicationRepository;
             this.commandCaller = commandCaller;
@@ -35,6 +37,7 @@ namespace LoanApp.Controllers
             this.loanAmount = loanAmount;
             this.communicationChannelRepository = communicationChannelRepository;
             this.yearOfResidenceRepository = yearOfResidenceRepository;
+            this._webHostEnvironment = enviroment;
         }
 
         public IActionResult Index()
@@ -173,7 +176,7 @@ namespace LoanApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult SendApplication()
+        public async Task<IActionResult> SendApplication(UploadModel upload)
         {
             ApplicationDto applicationDto = new ApplicationDto();
             ApplicationEmailDto applicationEmailDto = new ApplicationEmailDto();
@@ -214,7 +217,6 @@ namespace LoanApp.Controllers
 
             if (response.Result.Success)
             {
-                //applicationDto.Doctortypeid = doctorTypeRepository.GetData(applicationDto.Doctortypeid).Result.DoctorType;
                 applicationEmailDto.ApplicationId = _applicationRepository.GetLastId().Result.ToString();
                 applicationEmailDto.Doctortype = doctorTypeRepository.GetData(applicationDto.Doctortypeid).Result.DoctorType;
                 applicationEmailDto.Medicalcenter = Request.Form["Hospital"].ToString();
@@ -234,22 +236,28 @@ namespace LoanApp.Controllers
                 applicationEmailDto.Typefamilyrelationship = typeFamilyRelationShipRepository.GetData(applicationDto.Typefamilyrelationshipid).Result.TypeFamilyRelationShip;
                 applicationEmailDto.Amounttolend = decimal.Parse(Request.Form["lstLoanAmount"].ToString());
 
+                var fileName = await UploadFile(upload);
+
+                if (fileName != null && fileName != string.Empty)
+                    applicationEmailDto.Identificationimage = fileName;
+
                 _mail.Send(receiverEmail, applicationEmailDto);
-                
+
             }
 
             return View();
         }
 
-        /*
-        public async Task<ActionResult> UploadFile(UploadModel upload)
+        //Method to Upload image national identification..GR
+        public async Task<string> UploadFile(UploadModel upload)
         {
-            using(var db = new )
-            {
-               // _applicationRepository.
-            }
-                return View();
+            var fileName = Path.Combine(_webHostEnvironment.ContentRootPath, "Upload", upload.MyFile.FileName);
+            var fileStream = new FileStream(fileName, FileMode.Create);
+
+            await upload.MyFile.CopyToAsync(fileStream);
+            fileStream.Close();
+
+            return fileName;
         }
-        */
     }
 }
