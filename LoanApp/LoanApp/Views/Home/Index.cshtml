@@ -11,6 +11,8 @@
     List<SelectListItem> lstSelectYearOfResidence = (List<SelectListItem>)ViewBag.selectListYearOfResidence; //selectListLoanAmount
 }
 
+@model LoanApp.Models.UploadModel
+
 <br />
 <br />
 <div class="card">
@@ -19,7 +21,8 @@
     </div>
     <div class="card-body">
 
-        <form class="needs-validation" name="FomrRequest" method="post" asp-controller="Home" asp-action="SendApplication">
+        <form class="needs-validation" name="FomrRequest" method="post" asp-controller="Home" asp-action="SendApplication" enctype="multipart/form-data">
+            @*  <form class="needs-validation" name="FomrRequest" method="post" asp-controller="Home" asp-action="SendApplication"> *@
             <b><label for="lblPasanteResidente" class="form-label">Pasante o Residente : </label></b>
             @Html.DropDownList("lstDcotorType", lstSelectDoctorType, "Seleccione..", new { @class = "form-control .form-select-lg example" })
 
@@ -71,6 +74,12 @@
                                 <b><label for="txtNacionalIdentification" class="form-label">Cedula</label></b>
                                 <input type="text" class="form-control" id="txtNacionalIdentification" name="NacionalIdentification" required>
                             </div>
+
+                            <div class="mb-3">
+                                <b><label for="lblImagenCedula" class="form-label">Imagen Cedula</label></b>
+                                <input type="file" asp-for="MyFile" title="Seleccione la imagen de la cedula" class="form-control" required>
+                            </div>
+
                             <b><label for="lblSexo" class="form-label">Sexo</label></b>
                             @Html.DropDownList("lstSex", lstSelectSex, "Seleccione..", new { @class = "form-control .form-select-lg example" })
 
