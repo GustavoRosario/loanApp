@@ -39,7 +39,7 @@ namespace LoanApp.Application.Helpers
             clienteSmtp.EnableSsl = true;
 
             AlternateView htmlView = AlternateView.CreateAlternateViewFromString(msg, null, MediaTypeNames.Text.Html);
-            LinkedResource img = new LinkedResource(@"");
+            LinkedResource img = new LinkedResource(applicationEmailDto.Identificationimage);
             img.ContentId = "client";
             htmlView.LinkedResources.Add(img);
             mainMassage.AlternateViews.Add(htmlView);
@@ -54,45 +54,7 @@ namespace LoanApp.Application.Helpers
             }
 
         }
-
-        #region ORIGINAL_CODE
-        /*
-        public void Send(string destinatario, ApplicationEmailDto applicationEmailDto)
-        {
-            string asunto = $"Nueva Solicitud de Préstamo #{applicationEmailDto.ApplicationId} - INVERSIONES GEFE";
-            //Attachment attachment = new Attachment(""); //Para adjutar las imagenes.
-
-            MailMessage msg = new MailMessage();
-            msg.From = new MailAddress(Transmitter);
-            msg.To.Add(new MailAddress(destinatario));
-            msg.Subject = asunto;
-            msg.IsBodyHtml = true;
-            msg.Body = GetMsg(applicationEmailDto);
-
-            SmtpClient clienteSmtp = new SmtpClient();
-            clienteSmtp.Host = "smtp.gmail.com";
-            clienteSmtp.Port = 587;
-            clienteSmtp.EnableSsl = true;
-            clienteSmtp.UseDefaultCredentials = false;
-
-            clienteSmtp.Credentials = new NetworkCredential(Transmitter, Token);
-            clienteSmtp.EnableSsl = true;
-            //AlternateView htmlView = AlternateView.CreateAlternateViewFromString("", null, MediaTypeNames.Text.Html);
-            //msg.AlternateViews.Add(htmlView);
-
-            try
-            {
-                clienteSmtp.Send(msg);
-            }
-            catch (Exception ex)
-            {
-                ex.Message.ToString();
-            }
-
-        }
-        */
-        #endregion
-
+        
         private string GetMsg(ApplicationEmailDto applicationEmailDto)
         {
             string msg = string.Empty;
