@@ -4,6 +4,6 @@ namespace LoanApp.Models
 {
     public class UploadModel
     {
-        IFormFile MyFile { get; set; }
+        public IFormFile MyFile { get; set; }
     }
 }
