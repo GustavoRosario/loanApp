@@ -20,7 +20,7 @@ namespace LoanApp.Domain.Dto
         public string Province { get; set; }
         public int Identificationtypeid { get; set; }
         public string Identification { get; set; }
-        public byte Identificationimage { get; set; }
+        public string Identificationimage { get; set; }
         public string Sex { get; set; }
         public string Address { get; set; }
         public int Personprovinceid { get; set; }
