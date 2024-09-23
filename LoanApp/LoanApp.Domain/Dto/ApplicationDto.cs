@@ -14,7 +14,7 @@ namespace LoanApp.Domain.Dto
         public string Medicalcenter { get; set; }
         public string Passingtime { get; set; }
         public string Specialty { get; set; }
-        public int Yearofresidence { get; set; }
+        public int YearofresidenceId { get; set; }
         public int Statusid { get; set; }
         public string Name { get; set; }
         public string Lastname { get; set; }
@@ -29,6 +29,6 @@ namespace LoanApp.Domain.Dto
         public string Directfamilyname { get; set; }
         public int Typefamilyrelationshipid { get; set; }
         public string Directfamilytelephone { get; set; }
-        public decimal Amounttolend { get; set; }
+        public string Amounttolend { get; set; }
     }
 }

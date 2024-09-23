@@ -29,7 +29,7 @@ namespace LoanApp.Application.Application.Adapters.Repository
                 medical_center = applicationDto.Medicalcenter,
                 passing_time = applicationDto.Passingtime,
                 specialty = applicationDto.Specialty,
-                year_of_residence_id = applicationDto.Yearofresidence,
+                year_of_residence_id = applicationDto.YearofresidenceId,
                 //status_id = applicationDto.Statusid,
                 status_id = SAVE,
                 name = applicationDto.Name,

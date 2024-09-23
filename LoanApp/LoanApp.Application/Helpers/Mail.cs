@@ -54,7 +54,7 @@ namespace LoanApp.Application.Helpers
             }
 
         }
-        
+
         private string GetMsg(ApplicationEmailDto applicationEmailDto)
         {
             string msg = string.Empty;
@@ -72,6 +72,21 @@ namespace LoanApp.Application.Helpers
             msg += "<b>*- Sexo       :  </b>" + applicationEmailDto.Sex;
             msg += "</br>";
             msg += $"<b>*- Centro    :  </b> {applicationEmailDto.Medicalcenter}";
+
+            if (applicationEmailDto.Doctortype.Contains("PASANTE"))
+            {
+                msg += "</br>";
+                msg += $"<b>*- Tiempo Pasantia  :  </b> {applicationEmailDto.Passingtime}";
+            }
+            msg += "</br>";
+
+            if (applicationEmailDto.Doctortype.Contains("RESIDENTE"))
+            {
+                msg += $"<b>*- Especialidad   :  </b> {applicationEmailDto.Specialty}";
+                msg += "</br>";
+                msg += $"<b>*- Año Residencia :  </b> {applicationEmailDto.Yearofresidence}";
+            }
+
             msg += "</br>";
             msg += $"<b>*- Provincia :  </b> {applicationEmailDto.Province}";
             msg += "</br>";
@@ -86,7 +101,7 @@ namespace LoanApp.Application.Helpers
             msg += $"<b>*- Teléfono  :  </b> {applicationEmailDto.Directfamilytelephone}";
             msg += "</br>";
             msg += "</br>";
-            msg += $"<b>*- Monto del Préstamo  :  </b> {applicationEmailDto.Amounttolend.ToString("C")}";
+            msg += $"<b>*- Monto del Préstamo  :  </b> {applicationEmailDto.Amounttolend}";
             msg += "</br>";
             msg += "</br>";
             msg += "<img id = 'client' = '0' alt = 'client' src = 'cid:client' width = '300' height = '180' >";

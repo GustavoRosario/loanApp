@@ -28,6 +28,6 @@ namespace LoanApp.Domain.Dto
         public string Directfamilyname { get; set; }
         public string Typefamilyrelationship { get; set; }
         public string Directfamilytelephone { get; set; }
-        public decimal Amounttolend { get; set; }
+        public string Amounttolend { get; set; }
     }
 }

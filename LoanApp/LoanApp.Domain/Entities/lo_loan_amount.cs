@@ -7,7 +7,7 @@ namespace LoanApp.Domain.Entities
     {
         [Key]
         public int loan_amount_id { get; set; }
-        public decimal loan_amount { get; set; }
+        public string loan_amount { get; set; }
         public bool active { get; set; }
     }
 }

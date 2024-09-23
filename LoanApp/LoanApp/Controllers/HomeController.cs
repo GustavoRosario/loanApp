@@ -149,7 +149,7 @@ namespace LoanApp.Controllers
             {
                 return new SelectListItem()
                 {
-                    Text = lst.loan_amount.ToString("C"),
+                    Text = lst.loan_amount,
                     Value = lst.loan_amount.ToString(),
                     Selected = false
                 };
@@ -196,11 +196,27 @@ namespace LoanApp.Controllers
             _mail = new Mail(issuingEmail, tokenEmail);
 
             applicationDto.Doctortypeid = int.Parse(Request.Form["lstDcotorType"].ToString());
-            applicationDto.Medicalcenter = Request.Form["Hospital"].ToString();
+            applicationDto.Medicalcenter = Request.Form["Hospital"].ToString().ToUpper();
             applicationDto.Provinceid = int.Parse(Request.Form["lstProvince"].ToString());
-            applicationDto.Passingtime = Request.Form["PassingTime"].ToString();
-            applicationDto.Specialty = Request.Form["Speciality"].ToString();
-            applicationDto.Yearofresidence = int.Parse(Request.Form["lstYearOfResidence"].ToString());
+
+            if (Request.Form["PassingTime"] != string.Empty)
+                applicationDto.Passingtime = Request.Form["PassingTime"].ToString();
+            else
+                applicationDto.Passingtime = "NA";
+
+            if (Request.Form["Speciality"] != string.Empty)
+                applicationDto.Specialty = Request.Form["Speciality"].ToString();
+            else
+                applicationDto.Specialty = "NA";
+
+            var testVar = Request.Form["lstYearOfResidence"].ToString();
+
+
+            if (testVar != string.Empty)
+                applicationDto.YearofresidenceId = int.Parse(Request.Form["lstYearOfResidence"].ToString());
+            else
+                applicationDto.YearofresidenceId = 11;//CERO YEAR
+
             applicationDto.Name = Request.Form["Name"].ToString();
             applicationDto.Lastname = Request.Form["LastName"].ToString();
             applicationDto.Identification = Request.Form["NacionalIdentification"].ToString();
@@ -211,7 +227,7 @@ namespace LoanApp.Controllers
             applicationDto.Directfamilytelephone = Request.Form["FamilyTelephone"].ToString();
             applicationDto.Directfamilyname = Request.Form["FamilyName"].ToString();
             applicationDto.Typefamilyrelationshipid = int.Parse(Request.Form["lstTypeFamilyRelationShip"].ToString());
-            applicationDto.Amounttolend = decimal.Parse(Request.Form["lstLoanAmount"].ToString());
+            applicationDto.Amounttolend = Request.Form["lstLoanAmount"].ToString();
 
             var response = commandCaller.ExecuteProcess(applicationDto);
 
@@ -219,22 +235,22 @@ namespace LoanApp.Controllers
             {
                 applicationEmailDto.ApplicationId = _applicationRepository.GetLastId().Result.ToString();
                 applicationEmailDto.Doctortype = doctorTypeRepository.GetData(applicationDto.Doctortypeid).Result.DoctorType;
-                applicationEmailDto.Medicalcenter = Request.Form["Hospital"].ToString();
-                applicationEmailDto.Province = provinceRepository.GetData(applicationDto.Provinceid).Result.Province;
-                applicationEmailDto.Passingtime = Request.Form["PassingTime"].ToString();
+                applicationEmailDto.Medicalcenter = Request.Form["Hospital"].ToString().ToUpper();
+                applicationEmailDto.Province = provinceRepository.GetData(applicationDto.Provinceid).Result.Province.ToUpper();
+                applicationEmailDto.Passingtime = Request.Form["PassingTime"].ToString().ToUpper();
                 applicationEmailDto.Specialty = Request.Form["Speciality"].ToString();
-                applicationEmailDto.Yearofresidence = yearOfResidenceRepository.GetData(applicationDto.Yearofresidence).Result.YearOfResidence;
-                applicationEmailDto.Name = Request.Form["Name"].ToString();
-                applicationEmailDto.Lastname = Request.Form["LastName"].ToString();
+                applicationEmailDto.Yearofresidence = yearOfResidenceRepository.GetData(applicationDto.YearofresidenceId).Result.YearOfResidence;
+                applicationEmailDto.Name = Request.Form["Name"].ToString().ToUpper();
+                applicationEmailDto.Lastname = Request.Form["LastName"].ToString().ToUpper();
                 applicationEmailDto.Identification = Request.Form["NacionalIdentification"].ToString();
                 applicationEmailDto.Sex = sexRepository.GetData(applicationDto.Sexid).Result.Sex;
-                applicationEmailDto.Address = Request.Form["Address"].ToString();
+                applicationEmailDto.Address = Request.Form["Address"].ToString().ToUpper();
                 applicationEmailDto.Personprovinceid = int.Parse(Request.Form["lstSelectProvinceGeneral"].ToString());
                 applicationEmailDto.Movil = Request.Form["CelPhone"].ToString();
                 applicationEmailDto.Directfamilytelephone = Request.Form["FamilyTelephone"].ToString();
                 applicationEmailDto.Directfamilyname = Request.Form["FamilyName"].ToString();
                 applicationEmailDto.Typefamilyrelationship = typeFamilyRelationShipRepository.GetData(applicationDto.Typefamilyrelationshipid).Result.TypeFamilyRelationShip;
-                applicationEmailDto.Amounttolend = decimal.Parse(Request.Form["lstLoanAmount"].ToString());
+                applicationEmailDto.Amounttolend = Request.Form["lstLoanAmount"].ToString();
 
                 var fileName = await UploadFile(upload);
 
@@ -242,14 +258,13 @@ namespace LoanApp.Controllers
                     applicationEmailDto.Identificationimage = fileName;
 
                 _mail.Send(receiverEmail, applicationEmailDto);
-
             }
 
             return View();
         }
 
         //Method to Upload image national identification..GR
-        public async Task<string> UploadFile(UploadModel upload)
+        private async Task<string> UploadFile(UploadModel upload)
         {
             var fileName = Path.Combine(_webHostEnvironment.ContentRootPath, "Upload", upload.MyFile.FileName);
             var fileStream = new FileStream(fileName, FileMode.Create);

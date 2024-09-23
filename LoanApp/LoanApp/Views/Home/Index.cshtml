@@ -22,32 +22,32 @@
     <div class="card-body">
 
         <form class="needs-validation" name="FomrRequest" method="post" asp-controller="Home" asp-action="SendApplication" enctype="multipart/form-data">
-            @*  <form class="needs-validation" name="FomrRequest" method="post" asp-controller="Home" asp-action="SendApplication"> *@
+            @*<form class="needs-validation" name="FomrRequest" method="post" asp-controller="Home" asp-action="SendApplication">*@
             <b><label for="lblPasanteResidente" class="form-label">Pasante o Residente : </label></b>
-            @Html.DropDownList("lstDcotorType", lstSelectDoctorType, "Seleccione..", new { @class = "form-control .form-select-lg example" })
+            @Html.DropDownList("lstDcotorType", lstSelectDoctorType, "Seleccione..", new { @class = "form-control .form-select-lg example", onchange = "hiddenControlls()", required = "required" })
 
             <div class="mb-3">
-                <b><label for="lblHospital" class="form-label">Hospital / CPN</label></b>
+                <b><label for="lblHospital" class="form-label" name="lblHospital" id="lblHospital">Hospital / CPN</label></b>
                 <input type="txt" class="form-control" id="txtHospital" name="Hospital" aria-describedby="emailHelp" required>
             </div>
 
             <b><label for="lblProvince" class="form-label">Provincia</label></b>
-            @Html.DropDownList("lstProvince", lstSelectProvince, "Seleccione..", new { @class = "form-control .form-select-lg example" })
+            @Html.DropDownList("lstProvince", lstSelectProvince, "Seleccione..", new { @class = "form-control .form-select-lg example", required = "required" })
 
-            <div class="mb-3">
+            <div class="mb-3" name="divPassingTime" id="divPassingTime">
                 <b><label for="lbltextPassingTime" class="form-label">Que tiempo tiene como pasante ?</label></b>
-                <input type="txt" class="form-control" id="textPassingTime" name="PassingTime" aria-describedby="emailHelp" required>
+                <input type="text" class="form-control" id="textPassingTime" name="PassingTime" aria-describedby="emailHelp" disabled="true" required>
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3" name="divSpeciality" id="divSpeciality">
                 <b><label for="lblEspecialidad" class="form-label">Especialidad</label></b>
-                <input type="txt" class="form-control" id="textSpeciality" name="Speciality" aria-describedby="emailHelp" required>
+                <input type="text" class="form-control" id="textSpeciality" name="Speciality" aria-describedby="emailHelp" disabled="true" required>
             </div>
 
             <div class="mb-3">
                 <b><label for="lblYearOfResidence" class="form-label">Año de residencia</label></b>
                 @*   <input type="txt" class="form-control" id="textYearOfResidence" aria-describedby="emailHelp" required> *@
-                @Html.DropDownList("lstYearOfResidence", lstSelectYearOfResidence, "Seleccione..", new { @class = "form-control .form-select-lg example" })
+                @Html.DropDownList("lstYearOfResidence", lstSelectYearOfResidence, "Seleccione..", new { @class = "form-control .form-select-lg example", disabled = "disabled" })
             </div>
 
             <div class="accordion" id="accordionExample">
@@ -81,7 +81,7 @@
                             </div>
 
                             <b><label for="lblSexo" class="form-label">Sexo</label></b>
-                            @Html.DropDownList("lstSex", lstSelectSex, "Seleccione..", new { @class = "form-control .form-select-lg example" })
+                            @Html.DropDownList("lstSex", lstSelectSex, "Seleccione..", new { @class = "form-control .form-select-lg example", required = "required" })
 
                             <div class="mb-3">
                                 <b><label for="lblAddress" class="form-label">Direccion Domicilio</label></b>
@@ -89,7 +89,7 @@
                             </div>
 
                             <b><label for="lblProvinceLive" class="form-label">Provincia</label></b>
-                            @Html.DropDownList("lstSelectProvinceGeneral", lstSelectProvinceGeneral, "Seleccione..", new { @class = "form-control .form-select-lg example" })
+                            @Html.DropDownList("lstSelectProvinceGeneral", lstSelectProvinceGeneral, "Seleccione..", new { @class = "form-control .form-select-lg example", required = "required" })
 
                             <div class="mb-3">
                                 <b><label for="lblCelular" class="form-label">Celular (WhatSaap)</label></b>
@@ -132,20 +132,57 @@
                             </div>
                         </div>
                     </div>
+                </div>
 
+                <br />
+                <br />
+                <div class="mb-3">
+                    <b><label for="lblAmount" class="form-label">Monto a Prestar</label></b>
+                    @Html.DropDownList("lstLoanAmount", lstSelectLoanAmount, "Seleccione..", new { @class = "form-control .form-select-lg example" })
+                </div>
 
-                    <br />
-                    <br />
-                    <div class="mb-3">
-                        <b><label for="lblAmount" class="form-label">Monto a Prestar</label></b>
-                        @Html.DropDownList("lstLoanAmount", lstSelectLoanAmount, "Seleccione..", new { @class = "form-control .form-select-lg example" })
-                    </div>
-
-                    <br />
-                    <button type="submit" class="btn btn-primary">Enviar la Solicitud</button>
+                <br />
+                <button type="submit" class="btn btn-primary">Enviar la Solicitud</button>
 
         </form>
 
 
     </div>
 </div>
+
+<script>
+    /*Here Code*/
+    function hiddenControlls() {
+        document.querySelector("#lstDcotorType").addEventListener("change", function () {
+
+            var lblHospital = document.getElementById("lblHospital");
+            var textPassingTime = document.getElementById("textPassingTime");
+            var textSpeciality = document.getElementById("textSpeciality");
+            var objYearDropDown = document.getElementById("lstYearOfResidence");
+
+            if (this.value == 1) {
+                textPassingTime.removeAttribute("disabled", 0);
+                textSpeciality.setAttribute("disabled", 1);
+                objYearDropDown.setAttribute("disabled", 1);
+                lblHospital.value = "CPN";
+            }
+
+            if (this.value == 2) {
+                textSpeciality.removeAttribute("disabled", 0);
+                objYearDropDown.removeAttribute("disabled", 0);
+                textPassingTime.setAttribute("disabled", 1);
+                lblHospital.value = "Hospital";
+            }
+
+        });
+    }
+
+    function disableYearDropDown() {
+        document.querySelector("#lstDcotorType").addEventListener("load", function () {
+            var objYearDropDown = document.getElementById("lstYearOfResidence");
+            objYearDropDown.setAttribute("disabled", 1);
+        });
+    }
+
+</script>
+

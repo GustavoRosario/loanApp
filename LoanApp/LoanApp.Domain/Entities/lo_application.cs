@@ -26,7 +26,7 @@ namespace LoanApp.Domain.Entities
         public string direct_family_name { get; set; }
         public int type_family_relationship_id { get; set; }
         public string direct_family_telephone { get; set; }
-        public decimal amount_to_lend { get; set; }
+        public string amount_to_lend { get; set; }
         public DateTime record_date { get; set; }
         public DateTime record_time { get; set; }
         public bool active { get; set; }
