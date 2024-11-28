@@ -7,18 +7,17 @@ namespace LoanApp.Application.Application.Adapters.Repository
 {
     public class YearOfResidenceRepository : IYearOfResidenceRepository
     {
-        LoanAppDbContext _db;
-        private Context db = new Context();
+        private LoanAppDbContext LoanDbContext { get; set; }
 
-        public YearOfResidenceRepository()
+        public YearOfResidenceRepository(LoanAppDbContext loanDbContext)
         {
-            _db = db.Get();
+            this.LoanDbContext = loanDbContext;
         }
 
         public async Task<List<YearOfResidenceDto>> GetData()
         {
             List<YearOfResidenceDto> lst = null;
-            var lstYearOfResidende = _db.lo_year_of_residence.Where(x => x.year_of_residence_id > 0 && x.active == true).ToList();
+            var lstYearOfResidende = LoanDbContext.lo_year_of_residence.Where(x => x.year_of_residence_id > 0 && x.active == true).ToList();
 
             lst = lstYearOfResidende.ConvertAll(x =>
             {
@@ -35,7 +34,7 @@ namespace LoanApp.Application.Application.Adapters.Repository
         public Task<YearOfResidenceDto> GetData(int yeraOdResidenceId)
         {
             YearOfResidenceDto _yearOfResidenceDto = null;
-            var yearOfResidence = _db.lo_year_of_residence.Where(x => x.year_of_residence_id == yeraOdResidenceId && x.active == true).First();
+            var yearOfResidence = LoanDbContext.lo_year_of_residence.Where(x => x.year_of_residence_id == yeraOdResidenceId && x.active == true).First();
 
             _yearOfResidenceDto = new YearOfResidenceDto()
             {

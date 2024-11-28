@@ -8,17 +8,16 @@ namespace LoanApp.Application.Application.Adapters.Repository
 {
     public class ProvinceRepository : IProvinceRepository
     {
-        LoanAppDbContext _db;
-        private Context db = new Context();
+        private LoanAppDbContext LoanDbContext { get; set; }
 
-        public ProvinceRepository()
+        public ProvinceRepository(LoanAppDbContext loanAppDbContext)
         {
-            _db = db.Get();
+            this.LoanDbContext = loanAppDbContext;
         }
         public async Task<List<ProvinceDto>> GetData()
         {
             List<ProvinceDto> lst = null;
-            var lstProvince = _db.lo_province.Where(x => x.province_id > 0 && x.active == true).ToList();
+            var lstProvince = LoanDbContext.lo_province.Where(x => x.province_id > 0 && x.active == true).ToList();
 
             lst = lstProvince.ConvertAll(x =>
             {
@@ -36,7 +35,7 @@ namespace LoanApp.Application.Application.Adapters.Repository
         public Task<ProvinceDto> GetData(int provinceId)
         {
             ProvinceDto provinceDto = null;
-            var province = _db.lo_province.Where(x => x.province_id == provinceId && x.active == true).First();
+            var province = LoanDbContext.lo_province.Where(x => x.province_id == provinceId && x.active == true).First();
 
             provinceDto = new ProvinceDto()
             {

@@ -8,16 +8,16 @@ namespace LoanApp.Application.Application.Adapters.Repository
 {
     public class LoanAmount : ILoanAmount
     {
-        LoanAppDbContext _db;
-        private Context db = new Context();
-        public LoanAmount()
+        private LoanAppDbContext LoanDbContext { get; set; }
+
+        public LoanAmount(LoanAppDbContext loanDbContext)
         {
-            _db = db.Get();
+            this.LoanDbContext = loanDbContext;
         }
         public async Task<List<LoanAmountDto>> GetData()
         {
             List<LoanAmountDto> lst = null;
-            var lstLoanAmount = _db.lo_loan_amount.Where(x => x.loan_amount_id > 0 && x.active == true).ToList();
+            var lstLoanAmount = LoanDbContext.lo_loan_amount.Where(x => x.loan_amount_id > 0 && x.active == true).ToList();
 
             lst = lstLoanAmount.ConvertAll(x =>
             {

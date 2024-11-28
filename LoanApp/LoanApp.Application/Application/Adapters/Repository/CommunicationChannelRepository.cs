@@ -7,17 +7,17 @@ namespace LoanApp.Application.Application.Adapters.Repository
 {
     public class CommunicationChannelRepository : ICommunicationChannelRepository
     {
-        LoanAppDbContext _db;
-        private Context db = new Context();
-        public CommunicationChannelRepository()
+        private LoanAppDbContext LoanDbContext { get; set; }
+
+        public CommunicationChannelRepository(LoanAppDbContext LoanDbContext)
         {
-            _db = db.Get();
+            this.LoanDbContext = LoanDbContext;
         }
 
         public async Task<List<CommunicationChannelDto>> GetData(int communicationChannelTypeId)
         {
             List<CommunicationChannelDto> lst = null;
-            var lstCommunicationChannel = _db.lo_communication_channel.Where(x => x.communication_channel_type_id == communicationChannelTypeId && x.active == true).ToList();
+            var lstCommunicationChannel = LoanDbContext.lo_communication_channel.Where(x => x.communication_channel_type_id == communicationChannelTypeId && x.active == true).ToList();
 
             lst = lstCommunicationChannel.ConvertAll(x =>
             {

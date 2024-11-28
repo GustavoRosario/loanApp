@@ -10,16 +10,15 @@ namespace LoanApp.Application.Application.Adapters.Repository
 {
     public class TypeFamilyRelationShipRepository : ITypeFamilyRelationShipRepository
     {
-        LoanAppDbContext _db;
-        private Context db = new Context();
-        public TypeFamilyRelationShipRepository()
+        private LoanAppDbContext LoanDbContext { get; set; }
+        public TypeFamilyRelationShipRepository(LoanAppDbContext loanDbContext)
         {
-            _db = db.Get();
+            LoanDbContext = loanDbContext;
         }
         public async Task<List<TypeFamilyRelationShipDto>> GetData()
         {
             List<TypeFamilyRelationShipDto> lst = null;
-            var lstProvince = _db.lo_type_family_relationship.Where(x => x.type_family_relationship_id > 0 && x.active == true).ToList();
+            var lstProvince = LoanDbContext.lo_type_family_relationship.Where(x => x.type_family_relationship_id > 0 && x.active == true).ToList();
 
             lst = lstProvince.ConvertAll(x =>
             {
@@ -36,7 +35,7 @@ namespace LoanApp.Application.Application.Adapters.Repository
         public Task<TypeFamilyRelationShipDto> GetData(int typeFamilyRelationShipId)
         {
             TypeFamilyRelationShipDto typeFamilyRelationShipDto = null;
-            var typeFamilyRelationShip = _db.lo_type_family_relationship.Where(x => x.type_family_relationship_id == typeFamilyRelationShipId && x.active == true).First();
+            var typeFamilyRelationShip = LoanDbContext.lo_type_family_relationship.Where(x => x.type_family_relationship_id == typeFamilyRelationShipId && x.active == true).First();
 
             typeFamilyRelationShipDto = new TypeFamilyRelationShipDto()
             {

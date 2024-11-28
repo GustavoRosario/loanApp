@@ -8,17 +8,16 @@ namespace LoanApp.Application.Application.Adapters.Repository
 {
     public class SexRepository : ISexRepository
     {
-        LoanAppDbContext _db;
-        private Context db = new Context();
+        private LoanAppDbContext LoanDbContext { get; set; }
 
-        public SexRepository()
+        public SexRepository(LoanAppDbContext loanAppDbContext)
         {
-            _db = db.Get();
+            this.LoanDbContext = loanAppDbContext;
         }
         public async Task<List<SexDto>> GetData()
         {
             List<SexDto> lst = null;
-            var lstSex = _db.lo_sex.Where(x => x.sex_id > 0 && x.active == true).ToList();
+            var lstSex = LoanDbContext.lo_sex.Where(x => x.sex_id > 0 && x.active == true).ToList();
 
             lst = lstSex.ConvertAll(x =>
             {
@@ -35,7 +34,7 @@ namespace LoanApp.Application.Application.Adapters.Repository
         public Task<SexDto> GetData(int sexId)
         {
             SexDto sexDto = null;
-            var sex = _db.lo_sex.Where(x => x.sex_id == sexId && x.active == true).First();
+            var sex = LoanDbContext.lo_sex.Where(x => x.sex_id == sexId && x.active == true).First();
 
             sexDto = new SexDto()
             {

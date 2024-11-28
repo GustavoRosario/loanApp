@@ -3,23 +3,21 @@ using LoanApp.Domain.Ports.Repository;
 using LoanApp.Infrastructure.Entity.Data;
 using LoanApp.Application.Helpers;
 using LoanApp.Domain.Entities;
-using Microsoft.Identity.Client;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LoanApp.Application.Application.Adapters.Repository
 {
     public class ApplicationRepository : IApplicationRepository
     {
-        LoanAppDbContext _db;
-        private Context db = new Context();
-        public ApplicationRepository()
+        private LoanAppDbContext LoanDbContext { get; set; }
+
+        public ApplicationRepository(LoanAppDbContext LoanDbContext)
         {
-            _db = db.Get();
+            this.LoanDbContext = LoanDbContext;
         }
         public Task<ResponseDto> Create(ApplicationDto applicationDto)
         {
             var responseDto = new ResponseDto();
-            var loApplication = _db.Set<lo_application>();
+            var loApplication = LoanDbContext.Set<lo_application>();
             const int SAVE = 1;
             const int NATIONALIDRD = 1;
             loApplication.Add(new lo_application
@@ -53,7 +51,7 @@ namespace LoanApp.Application.Application.Adapters.Repository
 
             });
 
-            var saveRecord = _db.SaveChanges();
+            var saveRecord = LoanDbContext.SaveChanges();
 
             if (saveRecord > 0)
                 responseDto.Success = true;
@@ -63,7 +61,7 @@ namespace LoanApp.Application.Application.Adapters.Repository
 
         public Task<int> GetLastId()
         {
-            var applicationId = _db.lo_application.Max(q => q.application_id);
+            var applicationId = LoanDbContext.lo_application.Max(q => q.application_id);
 
             return Task.Run(() => applicationId);
         }

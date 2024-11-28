@@ -10,16 +10,15 @@ namespace LoanApp.Application.Application.Adapters.Repository
 {
     public class IdentificationTypeRepository : IIdentificationTypeRepository
     {
-        LoanAppDbContext _db;
-        private Context db = new Context();
-        public IdentificationTypeRepository()
+        private LoanAppDbContext LoanDbContext { get; set; }
+        public IdentificationTypeRepository(LoanAppDbContext LoanDbContext)
         {
-            _db = db.Get();
+            this.LoanDbContext = LoanDbContext;
         }
         public async Task<List<IdentificationTypeDto>> GetData()
         {
             List<IdentificationTypeDto> lst = null;
-            var lstProvince = _db.lo_identification_type.Where(x => x.identification_type_id > 0 && x.active == true).ToList();
+            var lstProvince = LoanDbContext.lo_identification_type.Where(x => x.identification_type_id > 0 && x.active == true).ToList();
 
             lst = lstProvince.ConvertAll(x =>
             {
