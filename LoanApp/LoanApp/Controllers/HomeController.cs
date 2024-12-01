@@ -229,7 +229,8 @@ namespace LoanApp.Controllers
             applicationDto.Typefamilyrelationshipid = int.Parse(Request.Form["lstTypeFamilyRelationShip"].ToString());
             applicationDto.Amounttolend = Request.Form["lstLoanAmount"].ToString();
 
-            var response = commandCaller.ExecuteProcess(applicationDto);
+            //var response = commandCaller.ExecuteProcess(applicationDto);
+            var response = _applicationRepository.Create(applicationDto);
 
             if (response.Result.Success)
             {
