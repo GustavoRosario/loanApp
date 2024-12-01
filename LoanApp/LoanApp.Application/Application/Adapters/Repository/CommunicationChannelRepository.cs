@@ -9,9 +9,9 @@ namespace LoanApp.Application.Application.Adapters.Repository
     {
         private LoanAppDbContext LoanDbContext { get; set; }
 
-        public CommunicationChannelRepository(LoanAppDbContext LoanDbContext)
+        public CommunicationChannelRepository(LoanAppDbContext loanDbContext)
         {
-            this.LoanDbContext = LoanDbContext;
+            this.LoanDbContext = loanDbContext;
         }
 
         public async Task<List<CommunicationChannelDto>> GetData(int communicationChannelTypeId)

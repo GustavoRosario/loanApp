@@ -9,9 +9,9 @@ namespace LoanApp.Application.Application.Adapters.Repository
     {
         private LoanAppDbContext LoanDbContext { get; set; }
 
-        public DoctorTypeRepository(LoanAppDbContext LoanDbContext)
+        public DoctorTypeRepository(LoanAppDbContext loanDbContext)
         {
-            this.LoanDbContext = LoanDbContext;
+            this.LoanDbContext = loanDbContext;
         }
         public async Task<List<DoctorTypeDto>> GetData()
         {

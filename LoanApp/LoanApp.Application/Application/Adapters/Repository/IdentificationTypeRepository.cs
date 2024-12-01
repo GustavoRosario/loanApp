@@ -11,9 +11,9 @@ namespace LoanApp.Application.Application.Adapters.Repository
     public class IdentificationTypeRepository : IIdentificationTypeRepository
     {
         private LoanAppDbContext LoanDbContext { get; set; }
-        public IdentificationTypeRepository(LoanAppDbContext LoanDbContext)
+        public IdentificationTypeRepository(LoanAppDbContext loanDbContext)
         {
-            this.LoanDbContext = LoanDbContext;
+            this.LoanDbContext = loanDbContext;
         }
         public async Task<List<IdentificationTypeDto>> GetData()
         {

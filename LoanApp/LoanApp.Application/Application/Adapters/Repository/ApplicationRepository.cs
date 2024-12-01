@@ -10,9 +10,9 @@ namespace LoanApp.Application.Application.Adapters.Repository
     {
         private LoanAppDbContext LoanDbContext { get; set; }
 
-        public ApplicationRepository(LoanAppDbContext LoanDbContext)
+        public ApplicationRepository(LoanAppDbContext loanDbContext)
         {
-            this.LoanDbContext = LoanDbContext;
+            this.LoanDbContext = loanDbContext;
         }
         public Task<ResponseDto> Create(ApplicationDto applicationDto)
         {
