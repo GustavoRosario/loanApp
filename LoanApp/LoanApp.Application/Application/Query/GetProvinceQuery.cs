@@ -11,7 +11,7 @@ namespace LoanApp.Application.Application.Query
 
         public GetProvinceQuery()
         {
-            _provinceRepository = new ProvinceRepository();
+            //_provinceRepository = new ProvinceRepository();
         }
 
         public Task<List<ProvinceDto>> Execute()

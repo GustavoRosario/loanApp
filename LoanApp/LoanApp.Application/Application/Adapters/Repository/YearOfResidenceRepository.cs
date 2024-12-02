@@ -1,5 +1,4 @@
-﻿using LoanApp.Application.Helpers;
-using LoanApp.Domain.Dto;
+﻿using LoanApp.Domain.Dto;
 using LoanApp.Domain.Ports.Repository;
 using LoanApp.Infrastructure.Entity.Data;
 
@@ -16,10 +15,9 @@ namespace LoanApp.Application.Application.Adapters.Repository
 
         public async Task<List<YearOfResidenceDto>> GetData()
         {
-            List<YearOfResidenceDto> lst = null;
-            var lstYearOfResidende = LoanDbContext.lo_year_of_residence.Where(x => x.year_of_residence_id > 0 && x.active == true).ToList();
+            var lstYearOfResidende = LoanDbContext.lo_year_of_residence.Where(x => x.active == true).ToList();
 
-            lst = lstYearOfResidende.ConvertAll(x =>
+            var lst = lstYearOfResidende.ConvertAll(x =>
             {
                 return new YearOfResidenceDto()
                 {
@@ -33,10 +31,9 @@ namespace LoanApp.Application.Application.Adapters.Repository
 
         public Task<YearOfResidenceDto> GetData(int yeraOdResidenceId)
         {
-            YearOfResidenceDto _yearOfResidenceDto = null;
             var yearOfResidence = LoanDbContext.lo_year_of_residence.Where(x => x.year_of_residence_id == yeraOdResidenceId && x.active == true).First();
 
-            _yearOfResidenceDto = new YearOfResidenceDto()
+            var _yearOfResidenceDto = new YearOfResidenceDto()
             {
                 YearOfResidenceId = yearOfResidence.year_of_residence_id,
                 YearOfResidence = yearOfResidence.year_of_residence

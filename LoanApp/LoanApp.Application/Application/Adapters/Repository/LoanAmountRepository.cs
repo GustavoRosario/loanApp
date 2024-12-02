@@ -1,25 +1,22 @@
 ﻿using LoanApp.Domain.Dto;
 using LoanApp.Domain.Ports.Repository;
 using LoanApp.Infrastructure.Entity.Data;
-using LoanApp.Application.Helpers;
-using LoanApp.Domain.Entities;
 
 namespace LoanApp.Application.Application.Adapters.Repository
 {
-    public class LoanAmount : ILoanAmount
+    public class LoanAmountRepository : ILoanAmountRepository
     {
         private LoanAppDbContext LoanDbContext { get; set; }
 
-        public LoanAmount(LoanAppDbContext loanDbContext)
+        public LoanAmountRepository(LoanAppDbContext loanDbContext)
         {
             this.LoanDbContext = loanDbContext;
         }
         public async Task<List<LoanAmountDto>> GetData()
         {
-            List<LoanAmountDto> lst = null;
-            var lstLoanAmount = LoanDbContext.lo_loan_amount.Where(x => x.loan_amount_id > 0 && x.active == true).ToList();
+            var lstLoanAmount = LoanDbContext.lo_loan_amount.Where(x => x.active == true).ToList();
 
-            lst = lstLoanAmount.ConvertAll(x =>
+            var lst = lstLoanAmount.ConvertAll(x =>
             {
                 return new LoanAmountDto()
                 {

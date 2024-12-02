@@ -5,9 +5,7 @@ using LoanApp.Domain.Ports.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using LoanApp.Application.Helpers;
-using LoanApp.Application.Dto;
 using LoanApp.Models;
-using System.IO;
 
 namespace LoanApp.Controllers
 {
@@ -20,12 +18,12 @@ namespace LoanApp.Controllers
         private IProvinceRepository provinceRepository;
         private ISexRepository sexRepository;
         private ITypeFamilyRelationShipRepository typeFamilyRelationShipRepository;
-        private ILoanAmount loanAmount;
+        private ILoanAmountRepository loanAmountRepository;
         private ICommunicationChannelRepository communicationChannelRepository;
         private IYearOfResidenceRepository yearOfResidenceRepository;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public HomeController(IApplicationRepository _applicationRepository, ICommandCaller commandCaller, IDoctorTypeRepository doctorTypeRepository, IIdentificationTypeRepository identificationTypeRepository, IProvinceRepository provinceRepository, ISexRepository sexRepository, ITypeFamilyRelationShipRepository typeFamilyRelationShipRepository, ILoanAmount loanAmount, ICommunicationChannelRepository communicationChannelRepository, IYearOfResidenceRepository yearOfResidenceRepository, IWebHostEnvironment enviroment)
+        public HomeController(IApplicationRepository _applicationRepository, ICommandCaller commandCaller, IDoctorTypeRepository doctorTypeRepository, IIdentificationTypeRepository identificationTypeRepository, IProvinceRepository provinceRepository, ISexRepository sexRepository, ITypeFamilyRelationShipRepository typeFamilyRelationShipRepository, ILoanAmountRepository loanAmountRepository, ICommunicationChannelRepository communicationChannelRepository, IYearOfResidenceRepository yearOfResidenceRepository, IWebHostEnvironment enviroment)
         {
             this._applicationRepository = _applicationRepository;
             this.commandCaller = commandCaller;
@@ -34,7 +32,7 @@ namespace LoanApp.Controllers
             this.provinceRepository = provinceRepository;
             this.sexRepository = sexRepository;
             this.typeFamilyRelationShipRepository = typeFamilyRelationShipRepository;
-            this.loanAmount = loanAmount;
+            this.loanAmountRepository = loanAmountRepository;
             this.communicationChannelRepository = communicationChannelRepository;
             this.yearOfResidenceRepository = yearOfResidenceRepository;
             this._webHostEnvironment = enviroment;
@@ -143,7 +141,7 @@ namespace LoanApp.Controllers
 
         private List<SelectListItem> LoadLoanAmount()
         {
-            var lstLoanAmount = loanAmount.GetData().Result;
+            var lstLoanAmount = loanAmountRepository.GetData().Result;
 
             List<SelectListItem> selectListLoanAmount = lstLoanAmount.ConvertAll(lst =>
             {

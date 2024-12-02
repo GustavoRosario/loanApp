@@ -11,7 +11,7 @@ namespace LoanApp.Application.Application.Command
         public CreateApplicationCommand(ApplicationDto applicationDto)
         {
             this._applicationDto = applicationDto;
-            this._applicationRepository = new ApplicationRepository();
+            //this._applicationRepository = new ApplicationRepository();
         }
 
         public Task<ResponseDto> Execute()

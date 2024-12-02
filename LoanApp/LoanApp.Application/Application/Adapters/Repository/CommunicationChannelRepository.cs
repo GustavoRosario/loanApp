@@ -1,5 +1,4 @@
-﻿using LoanApp.Application.Helpers;
-using LoanApp.Domain.Dto;
+﻿using LoanApp.Domain.Dto;
 using LoanApp.Domain.Ports.Repository;
 using LoanApp.Infrastructure.Entity.Data;
 
@@ -16,10 +15,9 @@ namespace LoanApp.Application.Application.Adapters.Repository
 
         public async Task<List<CommunicationChannelDto>> GetData(int communicationChannelTypeId)
         {
-            List<CommunicationChannelDto> lst = null;
             var lstCommunicationChannel = LoanDbContext.lo_communication_channel.Where(x => x.communication_channel_type_id == communicationChannelTypeId && x.active == true).ToList();
 
-            lst = lstCommunicationChannel.ConvertAll(x =>
+            var lst = lstCommunicationChannel.ConvertAll(x =>
             {
                 return new CommunicationChannelDto()
                 {

@@ -1,7 +1,6 @@
 ﻿using LoanApp.Domain.Dto;
 using LoanApp.Domain.Ports.Repository;
 using LoanApp.Infrastructure.Entity.Data;
-using LoanApp.Application.Helpers;
 using LoanApp.Domain.Entities;
 
 namespace LoanApp.Application.Application.Adapters.Repository
